@@ -20,3 +20,12 @@ let operate = (a, b, operator) => {
   };
   return result;
 };
+
+const numbers = document.querySelectorAll('.num');
+const operators = document.querySelectorAll('.operator')
+
+numbers.forEach(number => {
+  number.addEventListener('click', (e) => {
+    console.log(e.target.innerHTMl)
+  })
+});
