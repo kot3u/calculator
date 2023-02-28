@@ -7,6 +7,8 @@ const numbers = document.querySelectorAll('.num');
 const operators = document.querySelectorAll('.operator');
 const output = document.querySelector('.result');
 const equals = document.querySelector('#equals');
+const clear = document.querySelector("#clear");
+const del = document.querySelector('#delete');
 
 let add = (a, b) => { return a + b; };
 let substract = (a, b) => { return a - b; };
@@ -15,7 +17,7 @@ let multiply = (a, b) => { return a * b; };
 
 let operate = () => {
   if(a === '' || operator === '' || b === ''){
-  
+    return false;
   };
 
   a = parseFloat(a);
@@ -51,11 +53,7 @@ let appendNumber = (e) => {
     b += e.target.textContent;
     output.textContent = b;
   };
-}
-
-numbers.forEach(number => {
-  number.addEventListener('click', appendNumber);
-});
+};
 
 let setOperator = (e) => {
   if(operator != '' ){
@@ -65,8 +63,31 @@ let setOperator = (e) => {
   mode = 'b'
 };
 
+let clearContent = () => {
+  a = '';
+  b = '';
+  mode = 'a';
+  operator = '';
+  output.textContent = a;
+}
+
+let deleteLastDigit = () => {
+  if(mode === 'a') {
+    a = a.slice(0, -1)
+    output.textContent = a;
+  }
+  else if (mode === 'b') {
+    b = b.slice(0, -1)
+  };
+}
+
 operators.forEach(operator => {
   operator.addEventListener('click', setOperator);
-})
+});
 
+numbers.forEach(number => {
+  number.addEventListener('click', appendNumber);
+});
 equals.addEventListener('click', operate);
+clear.addEventListener('click', clearContent)
+del.addEventListener('click', deleteLastDigit)

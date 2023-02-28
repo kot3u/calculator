@@ -48,6 +48,7 @@ button {
   margin-top: 2px;
   background-color: rgb(255, 154, 154);
 }
+
 .lower-keyboard{
   display:flex;
   gap: 3px;
