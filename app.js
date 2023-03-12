@@ -7,87 +7,81 @@ const numbers = document.querySelectorAll('.num');
 const operators = document.querySelectorAll('.operator');
 const output = document.querySelector('.result');
 const equals = document.querySelector('#equals');
-const clear = document.querySelector("#clear");
+const clear = document.querySelector('#clear');
 const del = document.querySelector('#delete');
 
-let add = (a, b) => { return a + b; };
-let substract = (a, b) => { return a - b; };
-let divide = (a, b) => { return a / b; };
-let multiply = (a, b) => { return a * b; };
+const add = (a, b) => a + b;
+const substract = (a, b) => a - b;
+const divide = (a, b) => a / b;
+const multiply = (a, b) => a * b;
 
-let operate = () => {
-  if(a === '' || operator === '' || b === ''){
+const operate = () => {
+  if (a === '' || operator === '' || b === '') {
     return false;
-  };
+  }
 
   a = parseFloat(a);
   b = parseFloat(b);
-  if(operator === '+'){
+  if (operator === '+') {
     result = add(a, b);
-  }
-  else if (operator === '-') {
+  } else if (operator === '-') {
     result = substract(a, b);
-  }
-  else if (operator === '/') {
+  } else if (operator === '/') {
     result = divide(a, b);
-  }
-  else if (operator === '*') {
+  } else if (operator === '*') {
     result = multiply(a, b);
-  }
-  else {
+  } else {
     output.textContent = 'something went wrong, start over.';
-  };
+  }
   output.textContent = result;
   a = result;
   b = '';
   mode = 'a';
-  operator= '';
+  operator = '';
 };
 
-let appendNumber = (e) => {
-  if(mode === 'a'){
+const appendNumber = (e) => {
+  if (mode === 'a') {
     a += e.target.textContent;
     output.textContent = a;
-  }
-  else if(mode === 'b'){
+  } else if (mode === 'b') {
     b += e.target.textContent;
     output.textContent = b;
-  };
+  }
 };
 
-let setOperator = (e) => {
-  if(operator != '' ){
-    operate()
-  };
+const setOperator = (e) => {
+  if (operator != '') {
+    operate();
+  }
   operator = e.target.textContent;
-  mode = 'b'
+  mode = 'b';
 };
 
-let clearContent = () => {
+const clearContent = () => {
   a = '';
   b = '';
   mode = 'a';
   operator = '';
   output.textContent = a;
-}
+};
 
-let deleteLastDigit = () => {
-  if(mode === 'a') {
-    a = a.slice(0, -1)
+const deleteLastDigit = () => {
+  if (mode === 'a') {
+    a = a.slice(0, -1);
     output.textContent = a;
+  } else if (mode === 'b') {
+    b = b.slice(0, -1);
   }
-  else if (mode === 'b') {
-    b = b.slice(0, -1)
-  };
-}
+};
 
-operators.forEach(operator => {
+operators.forEach((operator) => {
   operator.addEventListener('click', setOperator);
 });
 
-numbers.forEach(number => {
+numbers.forEach((number) => {
   number.addEventListener('click', appendNumber);
 });
 equals.addEventListener('click', operate);
-clear.addEventListener('click', clearContent)
-del.addEventListener('click', deleteLastDigit)
+clear.addEventListener('click', clearContent);
+del.addEventListener('click', deleteLastDigit);
